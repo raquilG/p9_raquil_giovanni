@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure--d0vto%#fl6$8wao6_!_=nl2$!%8vq338!=ab78to_$y0q+fsg
 DEBUG = True
 
 ALLOWED_HOSTS = []
+AUTH_USER_MODEL = 'core.CustomUser'
 
 
 # Application definition
@@ -37,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'core',
+    'ticketing',
+    'following',
 ]
 
 MIDDLEWARE = [
@@ -103,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fr-fr'
 
 TIME_ZONE = 'UTC'
 
