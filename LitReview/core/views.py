@@ -20,7 +20,7 @@ def login_page(request):
             else:
                 message = 'Identifiants invalides.'
     return render(
-        request, 'authentification/login.html', context={'form': form, 'message': message})
+        request, 'core/login.html', context={'form': form, 'message': message})
             
 
 def logout_user(request):
