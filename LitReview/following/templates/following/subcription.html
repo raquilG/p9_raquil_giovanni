@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1> Suivre d'autres utilisateurs</h1>
+    <form method="post" action="{% url 'search-users' %}">
+        {% csrf_token %}
+        <input type="text" name="search" maxlength="25" value="" placeholder="Nom d'utilisateur">
+        <button type='submit'>Envoyer</button>
+    </form>
+
+    <ul>
+        {% for user in found_users %}
+            <li><p>{{ user.username }}--<button type="submit" >S'abonner</button></p></li>
+        {% endfor %}
+    </ul>
+    
+{% endblock content %}

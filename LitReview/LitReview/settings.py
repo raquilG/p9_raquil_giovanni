@@ -28,6 +28,11 @@ DEBUG = True
 ALLOWED_HOSTS = []
 AUTH_USER_MODEL = 'core.CustomUser'
 
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = LOGIN_URL
+
+
 
 # Application definition
 

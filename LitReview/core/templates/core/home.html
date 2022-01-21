@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if user.is_authenticated %} 
+        <p>Vous êtes connecté en tant que {{ request.user }}. <a href="{% url 'logout' %}">Se déconnecter</a></p>
+        <p>Voulez-vous <a href="{% url 'password_change' %}">changer votre mot de passe ?</a></p>
+
+        <a href='{% url "subcription" %}'>s'abonner à un utilisateur</a>'
+    {% endif %}
+{% endblock content %}
