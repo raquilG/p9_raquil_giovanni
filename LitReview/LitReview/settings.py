@@ -26,13 +26,6 @@ SECRET_KEY = 'django-insecure--d0vto%#fl6$8wao6_!_=nl2$!%8vq338!=ab78to_$y0q+fsg
 DEBUG = True
 
 ALLOWED_HOSTS = []
-AUTH_USER_MODEL = 'core.CustomUser'
-
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = LOGIN_URL
-
-
 
 # Application definition
 
@@ -129,12 +122,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR.joinpath('static/')]
 
-STATIC_ROOT = BASE_DIR.joinpath('www/LitReview/collected_statics/')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR.joinpath('media/')
 
-STATICFILES_DIRS = (
-    BASE_DIR.joinpath('static'),
-)
+AUTH_USER_MODEL = 'core.CustomUser'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = LOGIN_URL
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

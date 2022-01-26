@@ -19,6 +19,7 @@ from django.contrib.auth.views import (
     LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView)
 import core.views
 import following.views
+import ticketing.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,4 +40,5 @@ urlpatterns = [
     path('home/', core.views.home, name='home'),
     path('subscription/', following.views.subcription_page, name='subcription'),
     path('search_users/', following.views.search_users, name='search-users'),
+    path('ticket/create', ticketing.views.create_ticket, name='create-ticket'),
 ]
