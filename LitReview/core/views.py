@@ -4,11 +4,13 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 
 from . import forms
+from ticketing import models
 
 
 @login_required
 def home(request):
-    return render(request, 'core/home.html')
+    tickets = models.Ticket.objects.all()
+    return render(request, 'core/home.html', context={'tickets': tickets})
 
 
 def signup_page(request):

@@ -2,4 +2,19 @@
 
 {% block content %}
     <h1>home page</h1>
+    <div class="ticket">
+        {% for ticket in tickets %}
+            {% if user == ticket.user %} 
+                <p> Vous avez demandez une critique</p>
+            {% else %}
+                <p>{{ticket.user }} a demander une critique</p>
+            {% endif %}
+            <h2>titre: {{ ticket.title}}</h2>
+            <p>date: {{ ticket.time_created }}</p>
+            <p>{{ ticket.description }}</p>
+            <img class="image-ticket" src = '{{ ticket.image.url }}'>
+        {% endfor %}
+
+
+    </div>
 {% endblock content %}

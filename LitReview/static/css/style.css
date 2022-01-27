@@ -1,3 +1,9 @@
 .navigation {
     background-color: greenyellow;
 }
+
+.image-ticket {
+    height: 150px;
+    width: 100px;
+    border:hotpink;
+}
