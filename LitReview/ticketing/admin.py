@@ -1,7 +1,8 @@
 from django.contrib import admin
 
-from ticketing.models import Ticket
+from . import models
 
 
-admin.site.register(Ticket)
+admin.site.register(models.Ticket)
+admin.site.register(models.Review)
 # Register your models here.

@@ -10,8 +10,29 @@
 
     <ul>
         {% for user in found_users %}
-            <li><p>{{ user.username }}--<button type="submit" >S'abonner</button></p></li>
+        <form method="post" action="{% url 'subscribe-user' %}">
+            {% csrf_token %}
+            <input name="username" type="hidden" value="{{ user.username }}">
+            <li><p>
+                {{ user.username }}--<button type="submit" >S'abonner</button>
+                </p></li>
+        </form>
         {% endfor %}
     </ul>
+
+    <h2>Abonnements</h2>
+    {% for user_follow in users_follow %}
+        <p>{{ user_follow.followed_user }}</p>
+        <form method="POST" action="{% url 'unsubscribe-user' user_follow.id %}">
+            {% csrf_token %}
+            <button type='submit'>Se desabonner</button>
+        </form>
+
+    {%  endfor %}
+
+    <h2>Abonnés</h2>
+    {% for followed_by_user in followed_by %}
+        <p>{{ followed_by_user.user}}</p>
+    {%  endfor %}
     
 {% endblock content %}

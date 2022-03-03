@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>post</h1>
+    {% for post in posts %}
+        {% if post.type == "ticket" %}
+            {% include "ticket.html" %}
+            
+        {% elif post.type == "review" %} 
+            {% include "review.html" %}
+        {% endif %}
+        <form method="GET" action="{% url 'post-update' post.type post.id %}">
+            {% csrf_token %}
+            <button type='submit'>Modifier</button>
+        </form>
+
+        <form method="GET" action="{% url 'post-delete' post.type post.id %}">
+            {% csrf_token %}
+            <button type='submit'>Supprimer</button>
+        </form>
+        
+    {% endfor %}
+{% endblock content %}

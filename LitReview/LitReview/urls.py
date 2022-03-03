@@ -17,6 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth.views import (
     LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView)
+
+from django.conf import settings
+from django.conf.urls.static import static
+
 import core.views
 import following.views
 import ticketing.views
@@ -38,7 +42,20 @@ urlpatterns = [
          ),
     path('signup/', core.views.signup_page, name='signup'),
     path('home/', core.views.home, name='home'),
+
     path('subscription/', following.views.subcription_page, name='subcription'),
     path('search_users/', following.views.search_users, name='search-users'),
-    path('ticket/create', ticketing.views.create_ticket, name='create-ticket'),
+    path('subscription/subscribe/', following.views.subscribe_user, name='subscribe-user'),
+    path('subcription/<int:follow_id>/delete/', following.views.unsubscribe_user, name= 'unsubscribe-user'),
+
+    path('ticket/create/', ticketing.views.create_ticket, name='create-ticket'),
+    path('<int:ticket_id>/review/create/', ticketing.views.create_review, name='create-review'),
+    path('ticket-and-review/create', ticketing.views.create_ticket_and_review, name="create-ticket-and-review"),
+
+    path('posts/', ticketing.views.posts, name='posts'),
+    path("posts/<str:post_type>/<int:post_id>/update/", ticketing.views.post_update, name='post-update'),
+    path("posts/<str:post_type>/<int:post_id>/delete/", ticketing.views.post_delete, name='post-delete')
 ]
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

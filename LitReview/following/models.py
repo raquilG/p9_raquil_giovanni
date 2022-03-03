@@ -17,6 +17,7 @@ class UserFollows(models.Model):
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='followed_by')
+    
     # Your UserFollows model definition goes here
 
   

@@ -6,17 +6,28 @@
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
     </head>
     <body>
-        <nav class="navigation">
-            <img src="{% static 'LitReview/logo.png' %}" alt="logo LitReview" width="100px" height="150px">
-            {% if user.is_authenticated %} 
-                <p>Bienvenue {{ request.user }}.</p> 
-                <p><a href="{% url 'password_change' %}">changer votre mot de passe ?</a></p>
-                <p><a href='{% url "subcription" %}'>s'abonner à un utilisateur</a></p>
-                <p><a href='{% url "create-ticket" %}'>Creer un ticket</p>
+        <nav class="conteneur_nav">
+            <img id="logo" src="{% static 'LitReview/logo.png' %}" alt="logo LitReview" width="100px" height="150px">
+            <div class="bienvenue">
+                
+                {% if user.is_authenticated %} 
+                    <p>Bienvenue {{ request.user }}.</p>
+                    <p><a href="{% url 'password_change' %}">changer votre mot de passe ?</a></p>
+            </div>
+            <div class="nav">
+                <p><a href="{% url 'home' %}">Flux</a></p>
+                <p><a href="{% url 'posts' %}">Posts</a></p>
+                <p><a href="{% url 'subcription' %}">Abonnements</a></p>
                 <p><a href="{% url 'logout' %}">Se déconnecter</a></p>
+            </div>
             {% endif %}
         </nav>
         <div class="main">
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message }} <br>
+                {% endfor %}
+            {% endif %}
             {% block content %}{% endblock content %}
         </div>
         

@@ -12,6 +12,18 @@ class Ticket(models.Model):
     image = models.ImageField(null=True, blank=True)
     time_created = models.fields.DateTimeField(auto_now_add=True)
 
+    @property
+    def has_review(self):
+        try:
+            Review.objects.get(ticket__pk=self.id)
+        except Review.DoesNotExist:
+            return False
+        return True
+
+    @property
+    def type(self):
+        return "ticket"
+
 
 class Review(models.Model):
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
@@ -24,4 +36,7 @@ class Review(models.Model):
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     time_created = models.DateTimeField(auto_now_add=True)
 
-# Create your models here.
+    @property
+    def type(self):
+        return "review"
+

@@ -1,0 +1,9 @@
+<div class="review">
+        <p>voici la réponse</p>
+        <p>{{ post.time_created}}</p>
+        <h2>{{ post.header}}<h2>
+        <div class="review-ticket">{% include "ticket.html" with post=post.ticket %}</div>
+        <p>{{ post.body}}</p>
+        
+   
+</div>

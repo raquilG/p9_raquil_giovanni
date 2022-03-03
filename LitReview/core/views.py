@@ -10,7 +10,11 @@ from ticketing import models
 @login_required
 def home(request):
     tickets = models.Ticket.objects.all()
-    return render(request, 'core/home.html', context={'tickets': tickets})
+    reviews = models.Review.objects.all()
+    posts = list(tickets) + list(reviews)
+    context = {
+        'posts': posts}
+    return render(request, 'core/home.html', context)
 
 
 def signup_page(request):

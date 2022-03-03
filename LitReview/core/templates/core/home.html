@@ -1,20 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>home page</h1>
-    <div class="ticket">
-        {% for ticket in tickets %}
-            {% if user == ticket.user %} 
-                <p> Vous avez demandez une critique</p>
-            {% else %}
-                <p>{{ticket.user }} a demander une critique</p>
-            {% endif %}
-            <h2>titre: {{ ticket.title}}</h2>
-            <p>date: {{ ticket.time_created }}</p>
-            <p>{{ ticket.description }}</p>
-            <img class="image-ticket" src = '{{ ticket.image.url }}'>
-        {% endfor %}
-
-
+    <h1>flux</h1>
+    <div class="create">
+        <spam><a href="{% url 'create-ticket' %}">Demander une critique</spam>
+        <spam><a href="{% url 'create-ticket-and-review' %}">Creer une critique</spam>
     </div>
+    {% for post in posts %}
+        {% if post.type == "ticket" %}
+            {% include "ticket.html" %}
+            {% if not post.has_review %}
+                <form method="POST" action="{% url 'create-review'  post.id%}">
+                    {% csrf_token %}
+                    <button type='submit'>Répondre</button>
+                </form>
+            {% endif %}
+        {% elif post.type == "review" %} 
+            {% include "review.html" %}
+        {% endif %}
+    {% endfor %}
+
 {% endblock content %}
