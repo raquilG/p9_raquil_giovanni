@@ -1,9 +1,9 @@
 <div class="review">
-        <p>voici la réponse</p>
-        <p>{{ post.time_created}}</p>
-        <h2>{{ post.header}}<h2>
-        <div class="review-ticket">{% include "ticket.html" with post=post.ticket %}</div>
+        <div class="en_tete">
+                <h3>{{ post.header}} - {{post.stars}}<h3>
+                <span>{{ post.time_created}}</span>
+        </div>
         <p>{{ post.body}}</p>
-        
+        <div class="review-ticket">{% include "ticket.html" with post=post.ticket %}</div>
    
 </div>

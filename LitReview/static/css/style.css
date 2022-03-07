@@ -3,12 +3,30 @@ body {
     flex-direction: column;
 }
 
-.main {
-    margin: auto;
-}
+
 /* general */
 h1 {
     text-align: center;
+}
+
+.envoyer {
+    margin: 0 0 5 75%;
+    display: flex;
+}
+
+.en_tete {
+    display: flex;
+    justify-content: space-between;
+}
+
+span {
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
 }
 
 /* barre de navigation */
@@ -48,25 +66,75 @@ h1 {
 /* page flux */
 
 .create {
+    text-align: center;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    align-content: space-around;
+    margin: 0 25%;
 }
+
+/* page post */
+
+
+
+/* demander une critique */
+
+.create_ticket {
+    border: 4px double black;
+}
+
+.create_ticket p {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+}
+
+/* ticket*/
+
+.ticket {
+    border:5px double black;
+    margin: 10 10%;
+    color: black;
+}
+
 .image-ticket {
     height: 150px;
     width: 100px;
-    border:hotpink;
 }
 
-.ticket {
-    border:2px solid black;
+/* review */
+.review {
+    border:5px double black;
+    margin: 5 10%;
+    color: black;
 }
-
 .review-ticket {
     margin: 5px 10px 5px 10px;
-    border:2px solid black;
 }
 
-.review {
-    border:2px solid black;
+/* abonnements*/
+
+#search_users {
+    display: flex;
+    justify-content: center;
+}
+
+#search_users input {
+    width: 75%;
+    height: 30px;
+}
+
+.btn {
+    border-radius: 15%;
+}
+
+.abonnements {
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
 }

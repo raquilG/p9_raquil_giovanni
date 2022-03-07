@@ -9,15 +9,16 @@
         {% elif post.type == "review" %} 
             {% include "review.html" %}
         {% endif %}
-        <form method="GET" action="{% url 'post-update' post.type post.id %}">
-            {% csrf_token %}
-            <button type='submit'>Modifier</button>
-        </form>
+        <div class="envoyer">
+            <form method="GET" action="{% url 'post-update' post.type post.id %}">
+                {% csrf_token %}
+                <button type='submit'>Modifier</button>
+            </form>
 
-        <form method="GET" action="{% url 'post-delete' post.type post.id %}">
-            {% csrf_token %}
-            <button type='submit'>Supprimer</button>
-        </form>
-        
+            <form method="GET" action="{% url 'post-delete' post.type post.id %}">
+                {% csrf_token %}
+                <button type='submit'>Supprimer</button>
+            </form>
+        </div>
     {% endfor %}
 {% endblock content %}

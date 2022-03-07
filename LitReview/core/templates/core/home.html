@@ -3,16 +3,17 @@
 {% block content %}
     <h1>flux</h1>
     <div class="create">
-        <spam><a href="{% url 'create-ticket' %}">Demander une critique</spam>
-        <spam><a href="{% url 'create-ticket-and-review' %}">Creer une critique</spam>
+        <p><a href="{% url 'create-ticket' %}">Demander une critique</a></p>
+        <p><a href="{% url 'create-ticket-and-review' %}">Creer une critique</a></p>
     </div>
+    
     {% for post in posts %}
         {% if post.type == "ticket" %}
             {% include "ticket.html" %}
             {% if not post.has_review %}
                 <form method="POST" action="{% url 'create-review'  post.id%}">
                     {% csrf_token %}
-                    <button type='submit'>Répondre</button>
+                    <button class="envoyer" type='submit'>Creer une critique</button>
                 </form>
             {% endif %}
         {% elif post.type == "review" %} 

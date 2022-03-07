@@ -2,10 +2,10 @@
 
 {% block content %}
     <h1> Suivre d'autres utilisateurs</h1>
-    <form method="post" action="{% url 'search-users' %}">
+    <form id="search_users" method="post" action="{% url 'search-users' %}">
         {% csrf_token %}
         <input type="text" name="search" maxlength="25" value="" placeholder="Nom d'utilisateur">
-        <button type='submit'>Envoyer</button>
+        <button class="btn" type='submit'>Envoyer</button>
     </form>
 
     <ul>
@@ -19,20 +19,23 @@
         </form>
         {% endfor %}
     </ul>
-
-    <h2>Abonnements</h2>
-    {% for user_follow in users_follow %}
-        <p>{{ user_follow.followed_user }}</p>
-        <form method="POST" action="{% url 'unsubscribe-user' user_follow.id %}">
-            {% csrf_token %}
-            <button type='submit'>Se desabonner</button>
-        </form>
-
-    {%  endfor %}
-
-    <h2>Abonnés</h2>
-    {% for followed_by_user in followed_by %}
-        <p>{{ followed_by_user.user}}</p>
-    {%  endfor %}
     
+    <div class="abonnements">
+        <h2>Abonnements</h2>
+        <div
+            {% for user_follow in users_follow %}
+                {{ user_follow.followed_user }}
+                    <form method="POST" action="{% url 'unsubscribe-user' user_follow.id %}">
+                        {% csrf_token %}
+                        <button type='submit'>Se desabonner</button>
+                    </form>
+            {%  endfor %}
+    </div>
+    
+    <div class="abonnes">
+        <h2>Abonnés</h2>
+        {% for followed_by_user in followed_by %}
+            <p>{{ followed_by_user.user}}</p>
+        {%  endfor %}
+    </div>
 {% endblock content %}

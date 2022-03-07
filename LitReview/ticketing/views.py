@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+
 from . import forms
 from . import models
 from django.contrib import messages
@@ -64,6 +65,7 @@ def posts(request):
     tickets = models.Ticket.objects.filter(user=request.user)
     reviews = models.Review.objects.filter(user=request.user)
     posts = list(tickets) + list(reviews)
+    posts.sort(key= lambda x : x.time_created, reverse=True)
     context = {'posts': posts}
 
     return render(request, 'ticketing/posts.html', context)

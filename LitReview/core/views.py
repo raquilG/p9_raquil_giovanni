@@ -5,13 +5,16 @@ from django.contrib.auth.decorators import login_required
 
 from . import forms
 from ticketing import models
+from following import utils
 
 
 @login_required
 def home(request):
-    tickets = models.Ticket.objects.all()
-    reviews = models.Review.objects.all()
+    users_followed = utils.get_user_followed_users(request.user)
+    tickets = models.Ticket.objects.filter(user_id__in = users_followed)
+    reviews = models.Review.objects.filter(user_id__in = users_followed)
     posts = list(tickets) + list(reviews)
+    posts.sort(key= lambda x : x.time_created, reverse=True)
     context = {
         'posts': posts}
     return render(request, 'core/home.html', context)

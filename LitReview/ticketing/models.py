@@ -40,3 +40,10 @@ class Review(models.Model):
     def type(self):
         return "review"
 
+    @property
+    def stars(self):
+        result = ""
+        for i in range(5):
+            result += "★" if i < self.rating else "☆"
+        return result
+

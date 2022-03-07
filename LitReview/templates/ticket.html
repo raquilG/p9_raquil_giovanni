@@ -1,12 +1,14 @@
 
     <div class="ticket">
             {% if user == post.user %} 
-                <p> Vous avez demandez une critique</p>
+                <p> Vous avez demandé une critique</p>
             {% else %}
-                <p>{{post.user }} a demander une critique</p>
+                <p>{{post.user }} a demandé une critique</p>
             {% endif %}
-            <h2>titre: {{ post.title}}</h2>
-            <p>date: {{ post.time_created }}</p>
+            <div class="en_tete">
+                <h3>{{ post.title}}</h2>
+                <span>{{ post.time_created }}</span>
+            </div>
             <p>{{ post.description }}</p>
             {% if post.image %}
                 <img class="image-ticket" src = '{{ post.image.url }}' width="25%", height="25%">
