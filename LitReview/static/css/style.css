@@ -29,6 +29,12 @@ span {
     flex-direction: column;
 }
 
+.formulaire p {
+    display: flex;
+    flex-direction: column;
+}
+
+
 /* barre de navigation */
 .conteneur_nav {
     background-color: antiquewhite;
@@ -74,10 +80,6 @@ span {
     margin: 0 25%;
 }
 
-/* page post */
-
-
-
 /* demander une critique */
 
 .create_ticket {
@@ -93,10 +95,11 @@ span {
 
 /* ticket*/
 
-.ticket {
+.post {
     border:5px double black;
     margin: 10 10%;
     color: black;
+    padding: 1.5%;
 }
 
 .image-ticket {
@@ -112,6 +115,11 @@ span {
 }
 .review-ticket {
     margin: 5px 10px 5px 10px;
+}
+
+#id_rating {
+    list-style-type: none;
+    display: flex;
 }
 
 /* abonnements*/
@@ -130,11 +138,23 @@ span {
     border-radius: 15%;
 }
 
-.abonnements {
+.align_h2 h2 {
     text-align: center;
 }
 
-ul {
-    list-style-type: none;
+.sub {
     display: flex;
+    height: 40px;
+    justify-content: space-between;
+}
+
+.user {
+    width: 100%;
+    margin: inherit;
+    padding-top: 10px;
+    border: 2px solid black;
+}
+
+#form_abn {
+    margin: auto;
 }

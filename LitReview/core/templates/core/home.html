@@ -8,17 +8,29 @@
     </div>
     
     {% for post in posts %}
+
         {% if post.type == "ticket" %}
-            {% include "ticket.html" %}
-            {% if not post.has_review %}
-                <form method="POST" action="{% url 'create-review'  post.id%}">
-                    {% csrf_token %}
-                    <button class="envoyer" type='submit'>Creer une critique</button>
-                </form>
-            {% endif %}
-        {% elif post.type == "review" %} 
-            {% include "review.html" %}
+            <div class= "post">
+                {% if user == post.user %} 
+                    <p> Vous avez demandé une critique</p>
+                {% else %}
+                    <p>{{post.user }} a demandé une critique</p>
+                {% endif %}
+                {% include "ticket.html" %}
+                {% if not post.has_review %}
+                    <form method="POST" action="{% url 'create-review'  post.id%}">
+                        {% csrf_token %}
+                        <button class="envoyer" type='submit'>Creer une critique</button>
+                    </form>
+                {% endif %}
+            </div>
+
+        {% elif post.type == "review" %}
+            <div class = "post">
+                {% include "review.html" %}
+            </div>
         {% endif %}
+        
     {% endfor %}
 
 {% endblock content %}

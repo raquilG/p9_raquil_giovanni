@@ -8,34 +8,42 @@
         <button class="btn" type='submit'>Envoyer</button>
     </form>
 
-    <ul>
+    <ul >
         {% for user in found_users %}
         <form method="post" action="{% url 'subscribe-user' %}">
             {% csrf_token %}
             <input name="username" type="hidden" value="{{ user.username }}">
-            <li><p>
-                {{ user.username }}--<button type="submit" >S'abonner</button>
-                </p></li>
+            <li class="sub">
+                <p class="user">{{ user.username }}</p>
+                <button type="submit" >S'abonner</button>
+            </li>
         </form>
         {% endfor %}
     </ul>
     
-    <div class="abonnements">
+    <div class="align_h2">
         <h2>Abonnements</h2>
-        <div
+        <ul >
             {% for user_follow in users_follow %}
-                {{ user_follow.followed_user }}
-                    <form method="POST" action="{% url 'unsubscribe-user' user_follow.id %}">
-                        {% csrf_token %}
+                <form id="form_abn" method="POST" action="{% url 'unsubscribe-user' user_follow.id %}">
+                    <li class="sub">
+                        {% csrf_token %}    
+                        <p class="user">{{ user_follow.followed_user }}</p>
                         <button type='submit'>Se desabonner</button>
-                    </form>
+                    </li>
+                </form>
             {%  endfor %}
+        </ul>
     </div>
     
-    <div class="abonnes">
+    <div class="align_h2">
         <h2>Abonnés</h2>
-        {% for followed_by_user in followed_by %}
-            <p>{{ followed_by_user.user}}</p>
-        {%  endfor %}
+        <ul >
+            {% for followed_by_user in followed_by %}
+            <li class="sub">
+                <p class="user">{{ followed_by_user.user}}</p>
+            </li>
+            {%  endfor %}
+        </ul>
     </div>
 {% endblock content %}

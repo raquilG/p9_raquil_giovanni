@@ -1,9 +1,19 @@
-<div class="review">
-        <div class="en_tete">
-                <h3>{{ post.header}} - {{post.stars}}<h3>
-                <span>{{ post.time_created}}</span>
-        </div>
-        <p>{{ post.body}}</p>
-        <div class="review-ticket">{% include "ticket.html" with post=post.ticket %}</div>
-   
+{% if user == post.user %} 
+        <p> Vous avez publié une critique</p>
+{% else %}
+        <p>{{post.user }} a publié une critique</p>
+{% endif %}
+<div class="en_tete">
+        <h3>{{ post.header}} - {{post.stars}}<h3>
+        <span>{{ post.time_created}}</span>
 </div>
+<p>{{ post.body}}</p>
+<div class="post">
+        {% if user == post.ticket.user %} 
+                <p>Ticket: Vous </p>
+        {% else %}
+                <p>Ticket: {{post.ticket.user }} </p>
+        {% endif %}
+        {% include "ticket.html" with post=post.ticket %}
+</div>
+   

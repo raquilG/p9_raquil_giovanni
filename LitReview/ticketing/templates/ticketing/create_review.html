@@ -2,7 +2,7 @@
 
 {% block content %}
     <h2>Creer un réponse</h2>
-    <form method="post" >
+    <form class="formulaire" method="post" >
         {{ review_form.as_p }}
         {% csrf_token %}
         <button type="submit" >Publier</button>

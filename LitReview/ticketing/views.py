@@ -71,28 +71,32 @@ def posts(request):
     return render(request, 'ticketing/posts.html', context)
 
 @login_required
-def post_update(request,post_type, post_id):
+def post_update(request, post_type, post_id):
     if post_type == "ticket":
-        ticket = models.Ticket.objects.get(id=post_id)
+        post = models.Ticket.objects.get(id=post_id)
     else:
-        review = models.Review.objects.get(id=post_id)
+        post = models.Review.objects.get(id=post_id)
 
     if request.method == "POST":
         print(request.FILES)
         if post_type == "ticket":
-            form = forms.TicketForm(request.POST, request.FILES,instance=ticket)
+            form = forms.TicketForm(request.POST, request.FILES,instance=post)
         else:
-            form = forms.ReviewForm(request.POST, request.FILES, instance=review)
+            form = forms.ReviewForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
             return redirect('posts')
     else:
         if post_type == "ticket":
-            form = forms.TicketForm(instance=ticket)
+            form = forms.TicketForm(instance=post)
         else:
-            form = forms.ReviewForm(instance=review)
+            form = forms.ReviewForm(instance=post)
 
-    return render(request, 'ticketing/post_update.html', {"form": form})
+    context = {
+        "form": form,
+        "post": post
+    }
+    return render(request, 'ticketing/post_update.html', context)
 
  
 

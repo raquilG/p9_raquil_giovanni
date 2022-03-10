@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 from . import forms
 from ticketing import models
@@ -11,8 +12,10 @@ from following import utils
 @login_required
 def home(request):
     users_followed = utils.get_user_followed_users(request.user)
-    tickets = models.Ticket.objects.filter(user_id__in = users_followed)
-    reviews = models.Review.objects.filter(user_id__in = users_followed)
+    tickets = models.Ticket.objects.filter(Q(user_id__in = users_followed) | Q(user = request.user))
+    print(tickets)
+    reviews = models.Review.objects.filter(Q(user_id__in = users_followed) | Q(user = request.user))
+    print(reviews)
     posts = list(tickets) + list(reviews)
     posts.sort(key= lambda x : x.time_created, reverse=True)
     context = {

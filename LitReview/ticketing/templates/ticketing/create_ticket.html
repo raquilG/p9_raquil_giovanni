@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1>Creer un ticket</h2>
-    <form class="create_ticket" method="post" enctype="multipart/form-data">
+    <form class="formulaire" method="post" enctype="multipart/form-data">
         {{ ticket_form.as_p }}
         {% csrf_token %}
         <button class="Envoyer" type="submit" >Envoyer</button>
