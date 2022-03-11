@@ -29,6 +29,12 @@ span {
     flex-direction: column;
 }
 
+.formulaire {
+    margin: 10 10%;
+    border: 2px double black;
+    padding: 1.5%;
+}
+
 .formulaire p {
     display: flex;
     flex-direction: column;

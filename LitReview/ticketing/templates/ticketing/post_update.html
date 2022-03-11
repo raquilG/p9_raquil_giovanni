@@ -14,13 +14,29 @@
   <form class="formulaire" method="post" enctype="multipart/form-data">
     <p>critique</p>
     {% csrf_token %}
-    {{ form.as_p }}
-    {% if post.image.url is not None %}
-      {{ post.image  }}
-      <img src="{{ post.image.url }}" alt="">
+    {% if post.type == "ticket" %}
+
+      <p><label>titre</label>
+        {{ form.title }}</p>
+
+      <p><label>description</label>
+        {{ form.description }}</p>
+      <p>
+      {% if post.image.url is not None %}
+        <img src="{{ post.image.url }}" alt="" height=25% width=25%>
+        <label for="image-clear_id">effacer</label>
+        <input type="checkbox" name="image-clear" id="image-clear_id">
+        <label for="id_image">modification</label>
+        <input type="file" name="image" accept="image/*" id="id_image">
+      {% else %}
+        <p>Le ticket ne comporte pas d'image</p>
+      {% endif %}</p>
     {% else %}
-      <p>Le ticket ne comporte pas d'image</p>
+        {{ form.as_p }}
+
     {% endif %}
+
     <input type="submit" value="Envoyer">
+
  </form>
 {% endblock %}
