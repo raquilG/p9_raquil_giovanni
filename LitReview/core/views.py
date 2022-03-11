@@ -12,12 +12,12 @@ from following import utils
 @login_required
 def home(request):
     users_followed = utils.get_user_followed_users(request.user)
-    tickets = models.Ticket.objects.filter(Q(user_id__in = users_followed) | Q(user = request.user))
+    tickets = models.Ticket.objects.filter(Q(user_id__in=users_followed) | Q(user=request.user))
     print(tickets)
-    reviews = models.Review.objects.filter(Q(user_id__in = users_followed) | Q(user = request.user))
+    reviews = models.Review.objects.filter(Q(user_id__in=users_followed) | Q(user=request.user))
     print(reviews)
     posts = list(tickets) + list(reviews)
-    posts.sort(key= lambda x : x.time_created, reverse=True)
+    posts.sort(key=lambda x: x.time_created, reverse=True)
     context = {
         'posts': posts}
     return render(request, 'core/home.html', context)

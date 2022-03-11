@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from core.models import CustomUser
 
 
 # Create your models here.
@@ -17,7 +16,5 @@ class UserFollows(models.Model):
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='followed_by')
-    
-    # Your UserFollows model definition goes here
 
-  
+    # Your UserFollows model definition goes here

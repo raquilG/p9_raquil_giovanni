@@ -1,21 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-  {% if post.type == "review" %}
-      <h1> Modifier votre critique</h1>
-      <div class="post">
-        {% include "ticket.html" with post=post.ticket %}
-      </div>
-  {% else %}
-  <h1> Modifier votre ticket</h1>
-  {% endif %}
-
   <form class="formulaire" method="post" enctype="multipart/form-data">
     <p>critique</p>
     {% csrf_token %}
     {% if post.type == "ticket" %}
-
+      <h1> Modifier votre ticket</h1>
       <p><label>titre</label>
         {{ form.title }}</p>
 
@@ -31,7 +21,12 @@
       {% else %}
         <p>Le ticket ne comporte pas d'image</p>
       {% endif %}</p>
+      
     {% else %}
+      <h1> Modifier votre critique</h1>
+      <div class="post">
+        {% include "ticket.html" with post=post.ticket %}
+      </div>
         {{ form.as_p }}
 
     {% endif %}

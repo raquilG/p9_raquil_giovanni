@@ -10,7 +10,7 @@ from . import models
 def subcription_page(request):
     users_follow = models.UserFollows.objects.filter(user_id=request.user.id)
     users_follow_id = [user.followed_user_id for user in users_follow]
-    
+
     followed_by = models.UserFollows.objects.filter(followed_user_id=request.user.id)
 
     search = request.session['found_users'] if "found_users" in request.session else ""
@@ -23,7 +23,9 @@ def subcription_page(request):
                         username=request.user.username)
 
         if not found_users:
-            messages.add_message(request, messages.INFO, "il n'y a pas d'utilisateur correspond a votre rechercher.")
+            messages.add_message(request,
+                                 messages.INFO,
+                                 "il n'y a pas d'utilisateur correspond a votre rechercher.")
     else:
         found_users = []
 
@@ -54,8 +56,10 @@ def subscribe_user(request):
 @login_required
 def unsubscribe_user(request, follow_id):
     following = models.UserFollows.objects.get(id=follow_id)
-    if request.method =="POST":
+    if request.method == "POST":
         user_name = following.followed_user.username
         following.delete()
-        messages.add_message(request, messages.INFO, f"Vous vous êtes désabonné a l'utilisateur {user_name}!")
+        messages.add_message(request,
+                             messages.INFO,
+                             f"Vous vous êtes désabonné a l'utilisateur {user_name}!")
     return redirect('subcription')

@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
 
 from . import forms
 from . import models
@@ -33,7 +32,8 @@ def create_review(request, ticket_id):
             review.save()
             return redirect('home')
 
-    return render(request, 'ticketing/create_review.html', context={'review_form' : review_form})
+    return render(request, 'ticketing/create_review.html', context={'review_form': review_form})
+
 
 @login_required
 def create_ticket_and_review(request):
@@ -52,23 +52,23 @@ def create_ticket_and_review(request):
             review.save()
             return redirect('home')
     context = {
-        'review_form' : review_form,
-        'ticket_form' : ticket_form
+        'review_form': review_form,
+        'ticket_form': ticket_form
     }
 
     return render(request, 'ticketing/create_ticket_and_review.html', context)
-    
 
-    
+
 @login_required
 def posts(request):
     tickets = models.Ticket.objects.filter(user=request.user)
     reviews = models.Review.objects.filter(user=request.user)
     posts = list(tickets) + list(reviews)
-    posts.sort(key= lambda x : x.time_created, reverse=True)
+    posts.sort(key=lambda x: x.time_created, reverse=True)
     context = {'posts': posts}
 
     return render(request, 'ticketing/posts.html', context)
+
 
 @login_required
 def post_update(request, post_type, post_id):
@@ -80,7 +80,7 @@ def post_update(request, post_type, post_id):
     if request.method == "POST":
         print(request.FILES)
         if post_type == "ticket":
-            form = forms.TicketForm(request.POST, request.FILES,instance=post)
+            form = forms.TicketForm(request.POST, request.FILES, instance=post)
         else:
             form = forms.ReviewForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
@@ -98,19 +98,20 @@ def post_update(request, post_type, post_id):
     }
     return render(request, 'ticketing/post_update.html', context)
 
- 
 
 @login_required
-def post_delete(request,post_type, post_id):
+def post_delete(request, post_type, post_id):
     if post_type == "ticket":
         post = models.Ticket.objects.get(id=post_id)
     else:
         post = models.Review.objects.get(id=post_id)
     context = {"post": post}
 
-    if request.method =="POST":
+    if request.method == "POST":
         post.delete()
-        messages.add_message(request, messages.INFO, f"le post a été supprimé avec succès!")
+        messages.add_message(request,
+                             messages.INFO,
+                             "le post a été supprimé avec succès!")
         return redirect('posts')
 
     return render(request, 'ticketing/post_delete.html', context)

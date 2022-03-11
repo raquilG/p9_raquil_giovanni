@@ -46,4 +46,3 @@ class Review(models.Model):
         for i in range(5):
             result += "★" if i < self.rating else "☆"
         return result
-

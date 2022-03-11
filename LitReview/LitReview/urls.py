@@ -46,7 +46,7 @@ urlpatterns = [
     path('subscription/', following.views.subcription_page, name='subcription'),
     path('search_users/', following.views.search_users, name='search-users'),
     path('subscription/subscribe/', following.views.subscribe_user, name='subscribe-user'),
-    path('subcription/<int:follow_id>/delete/', following.views.unsubscribe_user, name= 'unsubscribe-user'),
+    path('subcription/<int:follow_id>/delete/', following.views.unsubscribe_user, name='unsubscribe-user'),
 
     path('ticket/create/', ticketing.views.create_ticket, name='create-ticket'),
     path('<int:ticket_id>/review/create/', ticketing.views.create_review, name='create-review'),
