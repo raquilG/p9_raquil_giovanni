@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Creer un réponse</h2>
+    <h2>Creer une critique</h2>
+    <div class="post">
+        {% include "ticket.html" with post=ticket %}
+      </div>
     <form class="formulaire" method="post" >
         {{ review_form.as_p }}
         {% csrf_token %}

@@ -16,12 +16,12 @@
         <img src="{{ post.image.url }}" alt="" height=25% width=25%>
         <label for="image-clear_id">effacer</label>
         <input type="checkbox" name="image-clear" id="image-clear_id">
-        <label for="id_image">modification</label>
-        <input type="file" name="image" accept="image/*" id="id_image">
+      
       {% else %}
         <p>Le ticket ne comporte pas d'image</p>
       {% endif %}</p>
-      
+        <label for="id_image">modification</label>
+        <input type="file" name="image" accept="image/*" id="id_image">
     {% else %}
       <h1> Modifier votre critique</h1>
       <div class="post">

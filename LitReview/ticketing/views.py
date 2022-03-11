@@ -22,17 +22,17 @@ def create_ticket(request):
 @login_required
 def create_review(request, ticket_id):
     review_form = forms.ReviewForm()
+    ticket = models.Ticket.objects.get(id=ticket_id)
     if request.method == 'POST':
         review_form = forms.ReviewForm(request.POST)
         if review_form.is_valid():
             review = review_form.save(commit=False)
-            ticket = models.Ticket.objects.filter(id=ticket_id)[0]
-            review.ticket = ticket
             review.user = request.user
+            review.ticket = ticket
             review.save()
             return redirect('home')
 
-    return render(request, 'ticketing/create_review.html', context={'review_form': review_form})
+    return render(request, 'ticketing/create_review.html', context={'review_form': review_form, 'ticket': ticket})
 
 
 @login_required
