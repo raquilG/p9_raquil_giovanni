@@ -6,7 +6,10 @@
         {% csrf_token %}
         <input type="text" name="search" maxlength="25" value="" placeholder="Nom d'utilisateur">
         <button class="btn" type='submit'>Envoyer</button>
+       
     </form>
+    <p style="text-align: center"> {{ message }} <p>
+
 
     <ul >
         {% for user in found_users %}

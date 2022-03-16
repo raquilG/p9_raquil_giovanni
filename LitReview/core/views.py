@@ -13,9 +13,10 @@ from following import utils
 def home(request):
     users_followed = utils.get_user_followed_users(request.user)
     tickets = models.Ticket.objects.filter(Q(user_id__in=users_followed) | Q(user=request.user))
-    print(tickets)
-    reviews = models.Review.objects.filter(Q(user_id__in=users_followed) | Q(user=request.user))
-    print(reviews)
+    tickets_id = [ticket.id for ticket in tickets]
+    reviews = models.Review.objects.filter(Q(user_id__in=users_followed) |
+                                           Q(user=request.user) |
+                                           Q(ticket_id__in=tickets_id))
     posts = list(tickets) + list(reviews)
     posts.sort(key=lambda x: x.time_created, reverse=True)
     context = {

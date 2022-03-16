@@ -21,15 +21,17 @@ def subcription_page(request):
                         id__in=users_follow_id
                     ).exclude(
                         username=request.user.username)
+        message = ""
 
         if not found_users:
-            messages.add_message(request,
-                                 messages.INFO,
-                                 "il n'y a pas d'utilisateur correspond a votre rechercher.")
+            message = "Il n'y a pas d'utilisateur correspond a votre recherche."
+
     else:
+        message = ""
         found_users = []
 
     context = {
+        'message': message,
         'found_users': found_users,
         'users_follow': users_follow,
         'followed_by': followed_by}
